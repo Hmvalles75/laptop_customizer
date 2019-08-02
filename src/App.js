@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import "./App.css";
 import Header from "./components/Header/header";
-import Features from "./components/FeatureList/Feature/features";
+import FeatureList from "./components/FeatureList/FeatureList";
 import Checkout from "./components/Checkout/Checkout";
+import "./App.css";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -28,20 +29,24 @@ class App extends Component {
     };
   }
 
-  updateFeature(feature, newValue) {
+  updateFeature = (feature, newValue) => {
     const selected = Object.assign({}, this.state.selected);
     selected[feature] = newValue;
     this.setState({
       selected
     });
-  }
+  };
 
   render() {
     return (
       <div className="App">
         <Header />
         <main>
-          <Features />
+          <FeatureList
+            features={this.props.features}
+            selected={this.state.selected}
+            updateFeature={this.updateFeature}
+          />
           <Checkout selected={this.state.selected} />
         </main>
       </div>
